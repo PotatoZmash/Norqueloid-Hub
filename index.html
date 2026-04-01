@@ -8,9 +8,17 @@
 <style>
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #0f0f0f, #1a1a2e);
+    font-family: sans-serif;
+    background: linear-gradient(135deg, #1a1200, #3a2600, #ffd700);
+    background-size: 400% 400%;
+    animation: goldFlow 10s ease infinite;
     color: white;
+}
+
+@keyframes goldFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 header {
@@ -19,7 +27,8 @@ header {
     font-size: 28px;
     font-weight: bold;
     background: rgba(0,0,0,0.4);
-    border-bottom: 2px solid #00ffcc;
+    border-bottom: 2px solid gold;
+    text-shadow: 0 0 10px gold, 0 0 20px #ffd700;
 }
 
 .container {
@@ -31,16 +40,25 @@ header {
 
 .card {
     background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(0,255,204,0.3);
+    border: 1px solid rgba(255,215,0,0.5);
     border-radius: 15px;
     padding: 20px;
     text-align: center;
     transition: 0.3s;
+    box-shadow: 0 0 15px rgba(255,215,0,0.3);
 }
 
 .card:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 20px #00ffcc;
+    box-shadow: 0 0 25px gold;
+}
+
+h3 {
+    text-shadow: 0 0 8px gold;
+}
+
+p {
+    text-shadow: 0 0 5px rgba(255,255,255,0.5);
 }
 
 button {
@@ -49,21 +67,24 @@ button {
     width: 100%;
     border: none;
     border-radius: 10px;
-    background: #00ffcc;
+    background: gold;
     color: black;
     font-weight: bold;
     cursor: pointer;
+    box-shadow: 0 0 10px gold;
 }
 
 button:hover {
-    background: #00ccaa;
+    background: #ffd700;
+    box-shadow: 0 0 20px gold;
 }
 
 footer {
     text-align: center;
     padding: 15px;
     font-size: 14px;
-    opacity: 0.7;
+    opacity: 0.8;
+    text-shadow: 0 0 5px gold;
 }
 </style>
 </head>
@@ -75,21 +96,9 @@ footer {
 <div class="container">
 
 <div class="card">
-    <h3>Adopt Me Script</h3>
-    <p>Auto Trade / Value Checker</p>
-    <button onclick="copyScript('adopt')">Copy Script</button>
-</div>
-
-<div class="card">
     <h3>MM2 Script</h3>
     <p>ESP / Auto Farm</p>
-    <button onclick="copyScript('mm2')">Copy Script</button>
-</div>
-
-<div class="card">
-    <h3>Universal Script</h3>
-    <p>Works on most games</p>
-    <button onclick="copyScript('uni')">Copy Script</button>
+    <button onclick="copyScript()">Copy Script</button>
 </div>
 
 </div>
@@ -97,19 +106,8 @@ footer {
 <footer>© 2026 Norqueloid</footer>
 
 <script>
-function copyScript(type) {
-    let script = "";
-
-    if(type === 'adopt') {
-        script = "loadstring(game:HttpGet('https://yourlink.com/adopt.lua'))()";
-    }
-    if(type === 'mm2') {
-        script = "loadstring(game:HttpGet('https://yourlink.com/mm2.lua'))()";
-    }
-    if(type === 'uni') {
-        script = "loadstring(game:HttpGet('https://yourlink.com/universal.lua'))()";
-    }
-
+function copyScript() {
+    const script = "loadstring(game:HttpGet('https://raw.githubusercontent.com/potatozmash/Norqueloid-Hub/main/mm2.lua'))()";
     navigator.clipboard.writeText(script);
     alert('Script Copied!');
 }
