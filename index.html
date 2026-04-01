@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Norqueloid Script Hub</title>
 
+<!-- ✅ FAVICON (TAB LOGO) -->
+<link rel="icon" type="image/png" href="https://yt3.googleusercontent.com/IwSUZDDApqR78JYoW-7iYTZg-GwSdwfPUdUf1aqGDSMGXyHIy6jfDVHk1OgERN8h1PCA4SuKhg=s900-c-k-c0x00ffffff-no-rj">
+
 <style>
 body {
     margin: 0;
@@ -31,6 +34,16 @@ header {
     text-shadow: 0 0 10px gold, 0 0 20px #ffd700;
 }
 
+/* HEADER LOGO */
+.header-logo {
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
+    vertical-align: middle;
+    margin-right: 10px;
+    box-shadow: 0 0 10px gold;
+}
+
 .container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -53,7 +66,7 @@ header {
     box-shadow: 0 0 25px gold;
 }
 
-/* LOGO */
+/* CARD LOGO */
 .card-logo {
     width: 90px;
     height: 90px;
@@ -104,7 +117,7 @@ footer {
     text-shadow: 0 0 5px gold;
 }
 
-/* 🔥 CUSTOM POPUP */
+/* 🔥 POPUP */
 .toast {
     position: fixed;
     bottom: 20px;
@@ -129,11 +142,16 @@ footer {
 
 <body>
 
-<header>Norqueloid Script Hub</header>
+<header>
+    <img src="https://yt3.googleusercontent.com/IwSUZDDApqR78JYoW-7iYTZg-GwSdwfPUdUf1aqGDSMGXyHIy6jfDVHk1OgERN8h1PCA4SuKhg=s900-c-k-c0x00ffffff-no-rj" 
+         class="header-logo">
+    Norqueloid Script Hub
+</header>
 
 <div class="container">
 
 <div class="card">
+    <!-- CARD LOGO -->
     <img src="https://i1.sndcdn.com/artworks-uzx2mJ2Y5naA3Z2H-ejw3nQ-t500x500.jpg" 
          class="card-logo">
 
@@ -146,7 +164,7 @@ footer {
 
 <footer>© 2026 Norqueloid</footer>
 
-<!-- 🔥 POPUP -->
+<!-- POPUP -->
 <div id="toast" class="toast">Copied to clipboard ✅</div>
 
 <script>
@@ -154,9 +172,7 @@ function copyScript(button) {
     const script = 'loadstring(game:HttpGet("https://raw.githubusercontent.com/PotatoZmash/MurderMystery2Luas/refs/heads/main/NorqueloidHub"))()';
 
     navigator.clipboard.writeText(script).then(() => {
-        showToast();
-        button.innerText = "Copied ✅";
-        setTimeout(() => button.innerText = "Copy Script", 2000);
+        success(button);
     }).catch(() => {
         const textarea = document.createElement("textarea");
         textarea.value = script;
@@ -165,10 +181,14 @@ function copyScript(button) {
         document.execCommand("copy");
         document.body.removeChild(textarea);
 
-        showToast();
-        button.innerText = "Copied ✅";
-        setTimeout(() => button.innerText = "Copy Script", 2000);
+        success(button);
     });
+}
+
+function success(button) {
+    showToast();
+    button.innerText = "Copied ✅";
+    setTimeout(() => button.innerText = "Copy Script", 2000);
 }
 
 function showToast() {
