@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Norqueloid Script Hub</title>
 
-<!-- ✅ FAVICON -->
 <link rel="icon" type="image/png" href="https://yt3.googleusercontent.com/IwSUZDDApqR78JYoW-7iYTZg-GwSdwfPUdUf1aqGDSMGXyHIy6jfDVHk1OgERN8h1PCA4SuKhg=s900-c-k-c0x00ffffff-no-rj">
 
 <style>
@@ -114,7 +113,6 @@ footer {
     text-shadow: 0 0 5px gold;
 }
 
-/* 🔥 POPUP */
 .toast {
     position: fixed;
     bottom: 20px;
@@ -135,7 +133,6 @@ footer {
     transform: translateY(0);
 }
 
-/* 🔥 COUNTER TEXT */
 .counter {
     margin-top: 10px;
     font-size: 13px;
@@ -154,6 +151,7 @@ footer {
 
 <div class="container">
 
+<!-- MM2 SCRIPT -->
 <div class="card">
     <img src="https://i1.sndcdn.com/artworks-uzx2mJ2Y5naA3Z2H-ejw3nQ-t500x500.jpg" 
          class="card-logo">
@@ -162,8 +160,18 @@ footer {
     <p>ESP / Auto Farm</p>
     <button onclick="copyScript(this)">Copy Script</button>
     
-    <!-- 🔥 LIVE COUNTER -->
     <div id="counter" class="counter">Loading clicks...</div>
+</div>
+
+<!-- STEAL A BRAINROT -->
+<div class="card">
+    <img src="noFilter.webp" class="card-logo">
+
+    <h3>STEAL A BRAINROT | KAWATAN HUB</h3>
+    <p>Auto Farm / OP Features</p>
+    <button onclick="copyScript2(this)">Copy Script</button>
+    
+    <div id="counter2" class="counter">Loading clicks...</div>
 </div>
 
 </div>
@@ -175,7 +183,7 @@ footer {
 <script>
 const API_URL = "https://api.countapi.xyz";
 
-// 🔥 LOAD COUNT
+// MM2 COUNT
 function loadCount() {
     fetch(API_URL + "/get/norqueloid/mm2script")
     .then(res => res.json())
@@ -187,19 +195,45 @@ function loadCount() {
     });
 }
 
-// 🔥 COPY + TRACK
+// SAB COUNT
+function loadCount2() {
+    fetch(API_URL + "/get/norqueloid/sabscript")
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById("counter2").innerText = "🔥 " + data.value + " copies";
+    })
+    .catch(() => {
+        document.getElementById("counter2").innerText = "Counter unavailable";
+    });
+}
+
+// COPY MM2
 function copyScript(button) {
     const script = 'loadstring(game:HttpGet("https://raw.githubusercontent.com/PotatoZmash/MurderMystery2Luas/refs/heads/main/NorqueloidHub"))()';
 
-    // TRACK CLICK
     fetch(API_URL + "/hit/norqueloid/mm2script")
     .then(() => loadCount());
 
-    navigator.clipboard.writeText(script).then(() => {
+    copy(script, button);
+}
+
+// COPY SAB
+function copyScript2(button) {
+    const script = 'loadstring(game:HttpGet("https://raw.githubusercontent.com/PotatoZmash/sab/refs/heads/main/CRYONIXHUB"))()';
+
+    fetch(API_URL + "/hit/norqueloid/sabscript")
+    .then(() => loadCount2());
+
+    copy(script, button);
+}
+
+// UNIVERSAL COPY
+function copy(text, button) {
+    navigator.clipboard.writeText(text).then(() => {
         success(button);
     }).catch(() => {
         const textarea = document.createElement("textarea");
-        textarea.value = script;
+        textarea.value = text;
         document.body.appendChild(textarea);
         textarea.select();
         document.execCommand("copy");
@@ -224,8 +258,9 @@ function showToast() {
     }, 2000);
 }
 
-// LOAD COUNT ON START
+// LOAD COUNTS
 loadCount();
+loadCount2();
 </script>
 
 </body>
