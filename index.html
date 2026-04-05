@@ -71,20 +71,6 @@ header {
     margin-bottom: 10px;
     border-radius: 12px;
     box-shadow: 0 0 15px gold;
-    transition: 0.3s;
-}
-
-.card-logo:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 25px gold;
-}
-
-h3 {
-    text-shadow: 0 0 8px gold;
-}
-
-p {
-    text-shadow: 0 0 5px rgba(255,255,255,0.5);
 }
 
 button {
@@ -125,18 +111,11 @@ footer {
     opacity: 0;
     transform: translateY(20px);
     transition: 0.4s;
-    pointer-events: none;
 }
 
 .toast.show {
     opacity: 1;
     transform: translateY(0);
-}
-
-.counter {
-    margin-top: 10px;
-    font-size: 13px;
-    opacity: 0.8;
 }
 </style>
 </head>
@@ -151,27 +130,20 @@ footer {
 
 <div class="container">
 
-<!-- MM2 SCRIPT -->
+<!-- MM2 -->
 <div class="card">
-    <img src="https://i1.sndcdn.com/artworks-uzx2mJ2Y5naA3Z2H-ejw3nQ-t500x500.jpg" 
-         class="card-logo">
-
+    <img src="https://i1.sndcdn.com/artworks-uzx2mJ2Y5naA3Z2H-ejw3nQ-t500x500.jpg" class="card-logo">
     <h3>MM2 Script</h3>
     <p>ESP / Auto Farm</p>
     <button onclick="copyScript(this)">Copy Script</button>
-    
-    <div id="counter" class="counter">Loading clicks...</div>
 </div>
 
-<!-- STEAL A BRAINROT -->
+<!-- SAB -->
 <div class="card">
-    <img src="noFilter.webp" class="card-logo">
-
+    <img src="https://tr.rbxcdn.com/180DAY-f85a85c43773ad29a38d707810e946df/768/432/Image/Webp/noFilter" class="card-logo">
     <h3>STEAL A BRAINROT | KAWATAN HUB</h3>
     <p>Auto Farm / OP Features</p>
     <button onclick="copyScript2(this)">Copy Script</button>
-    
-    <div id="counter2" class="counter">Loading clicks...</div>
 </div>
 
 </div>
@@ -181,56 +153,25 @@ footer {
 <div id="toast" class="toast">Copied to clipboard ✅</div>
 
 <script>
-const API_URL = "https://api.countapi.xyz";
-
-// MM2 COUNT
-function loadCount() {
-    fetch(API_URL + "/get/norqueloid/mm2script")
-    .then(res => res.json())
-    .then(data => {
-        document.getElementById("counter").innerText = "🔥 " + data.value + " copies";
-    })
-    .catch(() => {
-        document.getElementById("counter").innerText = "Counter unavailable";
-    });
-}
-
-// SAB COUNT
-function loadCount2() {
-    fetch(API_URL + "/get/norqueloid/sabscript")
-    .then(res => res.json())
-    .then(data => {
-        document.getElementById("counter2").innerText = "🔥 " + data.value + " copies";
-    })
-    .catch(() => {
-        document.getElementById("counter2").innerText = "Counter unavailable";
-    });
-}
 
 // COPY MM2
 function copyScript(button) {
     const script = 'loadstring(game:HttpGet("https://raw.githubusercontent.com/PotatoZmash/MurderMystery2Luas/refs/heads/main/NorqueloidHub"))()';
-
-    fetch(API_URL + "/hit/norqueloid/mm2script")
-    .then(() => loadCount());
-
     copy(script, button);
 }
 
 // COPY SAB
 function copyScript2(button) {
     const script = 'loadstring(game:HttpGet("https://raw.githubusercontent.com/PotatoZmash/sab/refs/heads/main/CRYONIXHUB"))()';
-
-    fetch(API_URL + "/hit/norqueloid/sabscript")
-    .then(() => loadCount2());
-
     copy(script, button);
 }
 
 // UNIVERSAL COPY
 function copy(text, button) {
     navigator.clipboard.writeText(text).then(() => {
-        success(button);
+        showToast();
+        button.innerText = "Copied ✅";
+        setTimeout(() => button.innerText = "Copy Script", 2000);
     }).catch(() => {
         const textarea = document.createElement("textarea");
         textarea.value = text;
@@ -239,28 +180,16 @@ function copy(text, button) {
         document.execCommand("copy");
         document.body.removeChild(textarea);
 
-        success(button);
+        showToast();
     });
-}
-
-function success(button) {
-    showToast();
-    button.innerText = "Copied ✅";
-    setTimeout(() => button.innerText = "Copy Script", 2000);
 }
 
 function showToast() {
     const toast = document.getElementById("toast");
     toast.classList.add("show");
-
-    setTimeout(() => {
-        toast.classList.remove("show");
-    }, 2000);
+    setTimeout(() => toast.classList.remove("show"), 2000);
 }
 
-// LOAD COUNTS
-loadCount();
-loadCount2();
 </script>
 
 </body>
