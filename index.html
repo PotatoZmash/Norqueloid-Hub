@@ -146,6 +146,14 @@ footer {
     <button onclick="copyScript2(this)">Copy Script</button>
 </div>
 
+<!-- ADOPT ME -->
+<div class="card">
+    <img src="https://www.playadopt.me/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fd4ypzn9i%2Fproduction%2F08b4889557346d2028d8bd0b2a67e9648127dbfb-1920x1080.png&w=1920&q=75" class="card-logo">
+    <h3>Adopt Me Easter Egg Collector</h3>
+    <p>Auto Collect / Event Farm</p>
+    <button onclick="copyScript3(this)">Copy Script</button>
+</div>
+
 </div>
 
 <footer>© 2026 Norqueloid</footer>
@@ -163,6 +171,12 @@ function copyScript(button) {
 // COPY SAB
 function copyScript2(button) {
     const script = 'loadstring(game:HttpGet("https://raw.githubusercontent.com/PotatoZmash/sab/refs/heads/main/CRYONIXHUB"))()';
+    copy(script, button);
+}
+
+// COPY ADOPT ME
+function copyScript3(button) {
+    const script = 'loadstring(game:HttpGet("https://raw.githubusercontent.com/PotatoZmash/Ragesploits/refs/heads/main/EasterEggCollector.lua"))()';
     copy(script, button);
 }
 
